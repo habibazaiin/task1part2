@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Users Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="askAndDisplayUsers()">Enter Users Info</button>
+
+    <div id="result"></div>
+
+    <script>
+        function askAndDisplayUsers() {
+
+            let numStr = prompt("How many persons do you want to enter?");
+            let num = Number(numStr);
+
+            if (isNaN(num) || num <= 0) {
+                alert("Invalid number. Please enter a positive number.");
+                return;
+            }
+
+            let users = [];
+
+            for (let i = 0; i < num; i++) {
+                let name;
+                do {
+                    name = prompt(`Enter name for person ${i + 1}`);
+                } while (!name || name.length <= 3 || name.length >= 10);
+
+                let age;
+                do {
+                    age = Number(prompt(`Enter age for person ${i + 1}`));
+                } while (isNaN(age) || age <= 10 || age >= 60);
+
+                users.push({ name: name, age: age });
+            }
+
+            let table = "<table>";
+            table += "<tr><th>Name</th><th>Age</th></tr>";
+
+            for (let user of users) {
+                table += `<tr><td>${user.name}</td><td>${user.age}</td></tr>`;
+            }
+
+            table += "</table>";
+
+            document.getElementById('result').innerHTML = table;
+        }
+    </script>
+
+</body>
+
+</html>
